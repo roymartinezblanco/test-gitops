@@ -12,4 +12,4 @@ spec:
   - namespace: '*'
     server: '*'
   sourceRepos:
-  - https://github.com/epidemicsound/gitops
+  - https://github.com/roymartinezblanco/test-gitops

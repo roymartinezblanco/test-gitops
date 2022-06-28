@@ -1,6 +1,6 @@
 namePrefix: kustomize-
 
-namespace: guestbook
+namespace: guestbook-test
 
 resources:
 - guestbook-ui-deployment.yaml
