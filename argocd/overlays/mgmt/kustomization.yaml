@@ -11,3 +11,9 @@ transformers:
 patchesStrategicMerge:
 - patches/argocd-rbac-cm-kustomize-data-patch.yaml
 
+secretGenerator:
+- name: cluster-shared-eu-we1
+  literals:
+  - name=local
+  - config='{"tlsClientConfig":{"insecure":false}}'
+  - server=https://kubernetes.default.svc

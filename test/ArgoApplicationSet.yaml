@@ -1,0 +1,39 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: infra
+  namespace: argocd
+spec:
+  # Delete Argo App but not Resources
+  syncPolicy:
+        preserveResourcesOnDeletion: true
+  generators:
+    - matrix:
+        generators:
+          - clusters: {}
+          - git:
+              repoURL:  https://github.com/epidemicsound/gitops
+              revision: main
+              directories:
+              - path: cluster-apps/bootstrap/*
+
+  template:
+    metadata:
+      name: '{{path.basename}}'
+      labels:
+        owner: sre
+        app: '{{path.basename}}'
+        env: '{{metadata.labels.env}}'
+        cluster: '{{name}}'
+    spec:
+      ## Automatically sync resources
+      # syncPolicy:
+        # automated: {}
+      project: infra
+      source:
+        repoURL: https://github.com/epidemicsound/gitops
+        targetRevision: main
+        path: '{{path}}/overlays/{{metadata.labels.env}}/{{name}}'
+      destination:
+        server: '{{server}}'
+        namespace: '{{path.basename}}'

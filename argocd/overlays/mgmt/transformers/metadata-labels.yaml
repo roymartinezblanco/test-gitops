@@ -4,7 +4,8 @@ metadata:
   name: argocd-metadata-labels
 labels:
   app: argocd
-  owner: sre
+  owner: roy
+  env: mgmt
 fieldSpecs:
 - path: metadata/labels
   create: true
