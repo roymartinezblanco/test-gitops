@@ -12,7 +12,7 @@ spec:
         generators:
           - clusters: {}
           - git:
-              repoURL:  https://github.com/epidemicsound/gitops
+              repoURL:  https://github.com/roymartinezblanco/test-gitops
               revision: main
               directories:
               - path: cluster-apps/bootstrap/*
@@ -31,7 +31,7 @@ spec:
         # automated: {}
       project: infra
       source:
-        repoURL: https://github.com/epidemicsound/gitops
+        repoURL: https://github.com/roymartinezblanco/test-gitops
         targetRevision: main
         path: '{{path}}/overlays/{{metadata.labels.env}}/{{name}}'
       destination:
