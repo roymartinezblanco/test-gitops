@@ -10,10 +10,13 @@ transformers:
 
 patchesStrategicMerge:
 - patches/argocd-rbac-cm-kustomize-data-patch.yaml
+- patches/argocd-cluster-secret-kustomize-labels-patch.yaml
+
+
 generatorOptions:
   disableNameSuffixHash: true
 secretGenerator:
-- name: cluster-local
+- name: local
   literals:
   - name=local
   - config='{"tlsClientConfig":{"insecure":false}}'

@@ -21,7 +21,7 @@ spec:
     metadata:
       name: '{{path.basename}}'
       labels:
-        owner: sre
+        owner: roy
         app: '{{path.basename}}'
         env: '{{metadata.labels.env}}'
         cluster: '{{name}}'
