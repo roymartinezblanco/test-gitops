@@ -1,0 +1,17 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+transformers:
+- transformers/metadata-labels.yaml
+
+resources:
+- resources/externalsecrets-crd-externalsecrets.yaml
+- resources/externalsecrets-crd-secretstore.yaml
+- resources/externalsecrets-deployment.yaml
+- resources/externalsecrets-namespace.yaml
+- resources/externalsecrets-rbac-clusterrole-controller.yaml
+- resources/externalsecrets-rbac-clusterrole-edit.yaml
+- resources/externalsecrets-rbac-clusterrole-view.yaml
+- resources/externalsecrets-rbac-clusterrolebinding-controller.yaml
+- resources/externalsecrets-rbac-role-leaderelection.yaml
+- resources/externalsecrets-serviceaccount.yaml

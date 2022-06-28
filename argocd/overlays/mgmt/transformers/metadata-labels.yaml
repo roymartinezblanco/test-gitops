@@ -1,0 +1,10 @@
+apiVersion: builtin
+kind: LabelTransformer
+metadata:
+  name: argocd-metadata-labels
+labels:
+  app: argocd
+  owner: sre
+fieldSpecs:
+- path: metadata/labels
+  create: true

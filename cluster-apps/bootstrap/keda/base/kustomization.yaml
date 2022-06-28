@@ -1,0 +1,23 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+transformers:
+- transformers/metadata-labels.yaml
+
+resources:
+- resources/apiservice.yaml
+- resources/clusterRole-keda-auth-reader.yaml
+- resources/clusterRole-keda-external-metrics-reader.yaml
+- resources/clusterRole-keda-hpa-controller-external-metrics.yaml
+- resources/clusterRole-keda-operator.yaml
+- resources/clusterRoleBinding-keda-operator.yaml
+- resources/clusterRoleBinding-keda-system-auth-delegator.yaml
+- resources/crd-cluster-trigger-authentications.yaml
+- resources/crd-scaled-jobs.yaml
+- resources/crd-scaled-objects.yaml
+- resources/crd-trigger-authentications.yaml
+- resources/deployment-keda-metrics-apiserver.yaml
+- resources/deployment-keda-operator.yaml
+- resources/namespace.yaml
+- resources/sa-keda-operator.yaml
+- resources/svc-keda-metrics-apiserver.yaml

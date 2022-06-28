@@ -1,0 +1,11 @@
+apiVersion: builtin
+kind: LabelTransformer
+metadata:
+  name: keda-metadata-labels
+labels:
+  app: keda-operator
+  owner: sre
+  version: 2.5.0
+fieldSpecs:
+- path: metadata/labels
+  create: true

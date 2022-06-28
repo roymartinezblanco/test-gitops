@@ -1,0 +1,12 @@
+kind: RoleBinding
+metadata:
+  name: keda-auth-reader
+  namespace: kube-system
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: extension-apiserver-authentication-reader
+subjects:
+- kind: ServiceAccount
+  name: keda-operator
+  namespace: keda
