@@ -21,3 +21,10 @@ resources:
 - resources/namespace.yaml
 - resources/sa-keda-operator.yaml
 - resources/svc-keda-metrics-apiserver.yaml
+
+namespace: keda
+
+images:
+- name: keda
+  newName: ghcr.io/kedacore/keda
+  newTag: 2.5.0

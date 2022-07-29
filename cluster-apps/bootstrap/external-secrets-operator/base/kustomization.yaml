@@ -1,6 +1,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
+namespace: external-secrets
 transformers:
 - transformers/metadata-labels.yaml
 
@@ -15,3 +16,8 @@ resources:
 - resources/externalsecrets-rbac-clusterrolebinding-controller.yaml
 - resources/externalsecrets-rbac-role-leaderelection.yaml
 - resources/externalsecrets-serviceaccount.yaml
+images:
+- name: external-secrets
+  newName: ghcr.io/external-secrets/external-secrets
+  newTag: v0.3.11
+

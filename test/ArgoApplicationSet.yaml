@@ -6,7 +6,7 @@ metadata:
 spec:
   # Delete Argo App but not Resources
   syncPolicy:
-        preserveResourcesOnDeletion: true
+    preserveResourcesOnDeletion: true
   generators:
     - matrix:
         generators:
@@ -27,13 +27,17 @@ spec:
         cluster: '{{name}}'
     spec:
       ## Automatically sync resources
-      # syncPolicy:
-        # automated: {}
+      syncPolicy:
+        automated: {}
+        syncOptions: 
+        - CreateNamespace=true # Namespace Auto-Creation ensures that namespace specified as the application destination exists in the destination cluster.
+        retry:
+          limit: 5 # number of failed sync attempt retries; unlimited number of attempts if less than 0
       project: infra
       source:
         repoURL: https://github.com/roymartinezblanco/test-gitops
         targetRevision: main
-        path: '{{path}}/overlays/{{metadata.labels.env}}/{{name}}'
+        path: '{{path}}/overlays/{{metadata.labels.env}}'
       destination:
         server: '{{server}}'
-        namespace: '{{path.basename}}'
+        # namespace: '{{path.basename}}'
