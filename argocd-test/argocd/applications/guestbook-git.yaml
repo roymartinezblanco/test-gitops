@@ -1,0 +1,53 @@
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: guestbook
+#   namespace: argocd
+#   finalizers:
+#     - resources-finalizer.argocd.argoproj.io
+# spec:
+#   project: default
+  
+#   source:
+#     repoURL: https://github.com/argoproj/argocd-example-apps.git
+#     targetRevision: master
+#     path: helm-guestbook
+    
+#     plugin:
+#       name: backstage-labeler
+#       env:
+#         - name: HELM_VALUES
+#           value: |
+#             commonLabels:
+#               servicename: guestbook
+
+  
+#   destination:
+#     server: https://kubernetes.default.svc
+#     namespace: guestbook
+  
+#   syncPolicy:
+#     automated:
+#       prune: true        # Remove resources when they're removed from Git
+#       selfHeal: true     # Force sync when cluster state differs from Git
+#       allowEmpty: false  # Don't sync if source is empty
+    
+#     syncOptions:
+#       - CreateNamespace=true              # Create namespace if it doesn't exist
+#       - PrunePropagationPolicy=foreground # Wait for resources to be deleted
+#       - PruneLast=true                    # Prune resources last
+#       - ServerSideApply=true              # Use server-side apply
+    
+#     retry:
+#       limit: 5
+#       backoff:
+#         duration: 5s
+#         factor: 2
+#         maxDuration: 3m
+  
+#   # Ignore differences in certain fields
+#   ignoreDifferences:
+#     - group: apps
+#       kind: Deployment
+#       jsonPointers:
+#         - /spec/replicas  # Ignore replica count if using HPA

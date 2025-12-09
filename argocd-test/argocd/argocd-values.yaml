@@ -1,0 +1,31 @@
+repoServer:
+  volumes:
+    - name: backstage-labeler-config
+      configMap:
+        name: backstage-labeler-config
+    - name: backstage-metadata
+      configMap:
+        name: services-metadata
+    - name: cmp-tmp
+      emptyDir: {}
+  
+  extraContainers:
+    - name: backstage-labeler
+      image: argocd-labeler:latest
+      imagePullPolicy: Never
+      command: [/var/run/argocd/argocd-cmp-server]
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 999
+      volumeMounts:
+        - mountPath: /var/run/argocd
+          name: var-files
+        - mountPath: /home/argocd/cmp-server/plugins
+          name: plugins
+        - mountPath: /home/argocd/cmp-server/config/plugin.yaml
+          subPath: plugin.yaml
+          name: backstage-labeler-config
+        - mountPath: /config
+          name: backstage-metadata
+        - mountPath: /tmp
+          name: cmp-tmp

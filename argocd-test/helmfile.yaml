@@ -1,0 +1,32 @@
+
+helmDefaults:
+  atomic: false
+  wait: true
+  timeout: 300
+
+repositories:
+  - name: argo
+    url: https://argoproj.github.io/argo-helm
+
+releases:
+  - name: argocd
+    chart: argo/argo-cd
+    namespace: argocd
+    createNamespace: true
+    values:
+      - argocd/argocd-values.yaml
+    hooks:
+      - events: ["presync"]
+        showlogs: true
+        command: "kubectl"
+        args: ["apply", "-f", "argocd/services-configmap.yaml"]
+      - events: ["presync"]
+        showlogs: true
+        command: "kubectl"
+        args: ["apply", "-f", "argocd/plugin-configmap.yaml"]
+      - events: ["postsync"]
+        showlogs: true
+        command: "kubectl"
+        args: ["apply", "-f", "argocd/applications/"]
+
+

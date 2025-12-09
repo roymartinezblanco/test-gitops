@@ -1,0 +1,45 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: guestbook
+  namespace: argocd
+spec:
+  generators:
+    - list:
+        elements:
+          - name: guestbook
+            servicename: guestbook
+  
+  template:
+    metadata:
+      name: '{{name}}'
+    spec:
+      project: default
+      
+      source:
+        repoURL: https://github.com/argoproj/argocd-example-apps.git
+        targetRevision: master
+        path: helm-guestbook
+        
+        plugin:
+          name: backstage-labeler
+        #   env:
+        #     - name: HELM_VALUES
+        #       value: |
+        #         commonLabels:
+        #           servicename: '{{servicename}}'
+      
+      # destination:
+      #   server: https://kubernetes.default.svc
+      #   namespace: '{{name}}'
+      destination:
+        name: in-cluster
+        namespace: guestbook
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+          - PrunePropagationPolicy=foreground
+          - PruneLast=true

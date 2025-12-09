@@ -1,0 +1,21 @@
+{
+    "obsv-metrics": {
+        "team": "tm-reliability",
+        "domain": "dm-dev-enablement",
+        "system": "observability",
+        "criticality": 3
+        
+    },
+    "payment-service": {
+    "team": "payments",
+    "domain": "finance"
+    },
+    "user-service": {
+    "team": "identity",
+    "domain": "auth"
+    },
+    "notification-service": {
+    "team": "communications",
+    "domain": "messaging"
+    }
+}
