@@ -1,0 +1,47 @@
+{{- if .Values.redis.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "guestbook.fullname" . }}-redis
+  labels:
+    app: guestbook
+    component: redis
+    {{- include "guestbook.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.redis.master.replicaCount }}
+  selector:
+    matchLabels:
+      app: guestbook
+      component: redis
+  template:
+    metadata:
+      labels:
+        app: guestbook
+        component: redis
+    spec:
+      containers:
+      - name: redis
+        image: "{{ .Values.redis.master.image.repository }}:{{ .Values.redis.master.image.tag }}"
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: redis
+          containerPort: {{ .Values.redis.master.service.port }}
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 100m
+            memory: 128Mi
+          requests:
+            cpu: 50m
+            memory: 64Mi
+        livenessProbe:
+          tcpSocket:
+            port: redis
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          tcpSocket:
+            port: redis
+          initialDelaySeconds: 5
+          periodSeconds: 5
+{{- end }}

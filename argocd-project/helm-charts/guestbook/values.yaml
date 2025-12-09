@@ -1,0 +1,44 @@
+# Default values for guestbook
+
+replicaCount: 1
+
+image:
+  repository: gcr.io/heptio-images/ks-guestbook-demo
+  tag: "0.2"
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 2379
+
+redis:
+  enabled: true
+  master:
+    image:
+      repository: redis
+      tag: "7.0"
+    replicaCount: 1
+    service:
+      type: ClusterIP
+      port: 6379
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 50m
+    memory: 64Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
