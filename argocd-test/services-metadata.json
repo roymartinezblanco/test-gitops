@@ -1,21 +1,37 @@
 {
-    "obsv-metrics": {
-        "team": "tm-reliability",
-        "domain": "dm-dev-enablement",
-        "system": "observability",
-        "criticality": 3
-        
-    },
-    "payment-service": {
+  "obsv-metrics": {
+    "team": "tm-reliability",
+    "domain": "dm-dev-enablement",
+    "system": "observability",
+    "criticality": 3
+  },
+  "argocd": {
+    "team": "tm-reliability",
+    "domain": "dm-dev-enablement",
+    "system": "build-release"
+  },
+  "payment-service": {
     "team": "payments",
-    "domain": "finance"
-    },
-    "user-service": {
+    "domain": "finance",
+    "system": "financial-services",
+    "criticality": 5
+  },
+  "user-service": {
     "team": "identity",
-    "domain": "auth"
-    },
-    "notification-service": {
+    "domain": "auth",
+    "system": "authentication",
+    "criticality": 4
+  },
+  "notification-service": {
     "team": "communications",
-    "domain": "messaging"
-    }
+    "domain": "messaging",
+    "system": "notification-platform",
+    "criticality": 2
+  },
+  "guestbook": {
+    "team": "demo-team",
+    "domain": "demo",
+    "system": "examples",
+    "criticality": 1
+  }
 }

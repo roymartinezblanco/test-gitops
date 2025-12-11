@@ -1,0 +1,46 @@
+# Backstage Labeler Configuration
+# This file defines how metadata is extracted and applied as labels
+
+# Label prefix to use for all generated labels
+label_prefix: "molops.net"
+
+# Metadata source configuration
+metadata:
+  # Path to the JSON file containing service metadata
+  source_file: "services-metadata.json"
+
+  # Label on resources to use for metadata lookup
+  lookup_label: "tags.datadoghq.com/service"
+
+# Metadata fields to extract and convert to labels
+# Each field will be extracted from the metadata JSON and applied as:
+# {label_prefix}/{field_name}: {value}
+fields:
+  - name: "team"
+    default: "unset"
+    required: true
+
+  - name: "domain"
+    default: "unset"
+    required: true
+
+  - name: "system"
+    default: "unset"
+    required: true
+
+  - name: "criticality"
+    default: "unset"
+    required: true
+
+# Additional static labels to always apply
+# static_labels:
+#   "app.kubernetes.io/managed-by": "helmfile"
+
+# Processing options
+options:
+
+  # Preserve existing labels
+  preserve_existing: false
+
+  # Verbose logging
+  # verbose: true

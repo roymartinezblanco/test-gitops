@@ -1,0 +1,32 @@
+[tool.poetry]
+name = "backstage-labeler"
+version = "2.0.0"
+description = "Add Backstage metadata labels to Kubernetes manifests from Helm/Helmfile templates with YAML configuration"
+authors = ["Your Team <team@example.com>"]
+readme = "README.md"
+license = "MIT"
+packages = [{include = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pyyaml = "^6.0.2"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.4"
+black = "^24.10.0"
+ruff = "^0.8.4"
+
+[tool.poetry.scripts]
+backstage-labeler = "src.backstage_labeler:main"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 100
+target-version = ['py311']
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
